@@ -10,3 +10,7 @@ const response = require("../res/res");
 exports.index = function(req,res){
     response.ok("Rest Api Berhasil Berjalan ",res);
 }
+
+exports.error = function(req,res){
+    response.error("Your Request is broken",res);
+}
