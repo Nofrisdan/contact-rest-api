@@ -5,4 +5,6 @@ module.exports = function(app){
 
 
     app.route("/").get(controller.index);
+
+    app.route("/tes").get(controller.error);
 }
