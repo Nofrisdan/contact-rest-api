@@ -2,13 +2,20 @@
 
 // database
 require("../database/connect");
-const Contact = require("../model/Kontak_m");
+const {Contact} = require("../model/Kontak_m");
 const response = require("../res/res");
 
 
 // controler
-exports.index = function(req,res){
-    response.ok("Rest Api Berhasil Berjalan ",res);
+exports.index = async function(req,res){
+    const value = await Contact.find();
+    response.ok(value,res);
+}
+
+exports.nama = async function(req,res){
+
+    const value = await Contact.find({nama : req.query.nama});
+    response.ok(value,res);
 }
 
 exports.error = function(req,res){
