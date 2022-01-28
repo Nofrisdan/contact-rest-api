@@ -12,10 +12,15 @@ exports.index = async function(req,res){
     response.ok(value,res);
 }
 
-exports.nama = async function(req,res){
 
+exports.nama = async function(req,res){
     const value = await Contact.find({nama : req.query.nama});
-    response.ok(value,res);
+
+    if(value.length != 0){
+        response.ok(value,res);
+    }else{
+        response.error("Your Request Not Defined",res);
+    }  
 }
 
 exports.error = function(req,res){

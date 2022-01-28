@@ -10,7 +10,6 @@ app.use(express.json());
 
 // routes
 const routes = require("./routes");
-
 routes(app);
 
 
