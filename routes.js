@@ -5,6 +5,6 @@ module.exports = function(app){
     
     app.route("/").get(controller.index);
     app.route("/Contact/all").get(controller.alldata);
-    app.route("/Contact/:nama").get(controller.getData);
-
+    app.route("/Contact/get").get(controller.getData);
+    app.route("/Contact/add").post(controller.addData);
 }
