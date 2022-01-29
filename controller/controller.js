@@ -19,7 +19,7 @@ exports.index = async function(req,res){
 exports.alldata = async function(req,res){
     const data = await Contact.find();
 
-    if(data){
+    if(data.length != 0){
         response.ok(data,res);
     }else{
         response.error("Your Request Is Broken",res);
@@ -29,12 +29,24 @@ exports.alldata = async function(req,res){
 
 // menampilkan data berdasarkan nama
 exports.getData = async function(req,res){
-    const data = await Contact().find({nama : req.query.nama});
+    const data = await Contact.find({nama : req.query.nama});
 
-    if(data){
+    if(data.length != 0){
         response.ok(data,res);
     }else{
         response.error("Your Request Is Broken",res);
     }
+}
+
+
+// menambahkan data contact
+exports.addData = async function(req,res){
+    const data = {
+        nama : req.body.nama,
+        nohp : req.body.nohp,
+        email : req.body.email
+    }
+
+    response.ok(data,res);
 }
 
