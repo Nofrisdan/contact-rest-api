@@ -7,22 +7,34 @@ const response = require("../res/res");
 
 
 // controler
+
+// running rest-api
 exports.index = async function(req,res){
-    const value = await Contact.find();
-    response.ok(value,res);
-}
+    response.ok("Rest Api Running",res);
+  }
+  
 
+// menampilkan semua data berdasarkan nama
 
-exports.nama = async function(req,res){
-    const value = await Contact.find({nama : req.query.nama});
+exports.alldata = async function(req,res){
+    const data = await Contact.find();
 
-    if(value.length != 0){
-        response.ok(value,res);
+    if(data){
+        response.ok(data,res);
     }else{
-        response.error("Your Request Not Defined",res);
-    }  
+        response.error("Your Request Is Broken",res);
+    }
 }
 
-exports.error = function(req,res){
-    response.error("Your Request is broken",res);
+
+// menampilkan data berdasarkan nama
+exports.getData = async function(req,res){
+    const data = await Contact().find({nama : req.query.nama});
+
+    if(data){
+        response.ok(data,res);
+    }else{
+        response.error("Your Request Is Broken",res);
+    }
 }
+
