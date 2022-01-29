@@ -47,6 +47,14 @@ exports.addData = async function(req,res){
         email : req.body.email
     }
 
-    response.ok(data,res);
+    const insert = await Contact.insertMany(data);
+
+    if(insert){
+        response.ok("Data Berhasil Ditambahkan",res);
+    }else{
+        response.error("Insertin data Failed",res);
+    }
+
+    
 }
 
