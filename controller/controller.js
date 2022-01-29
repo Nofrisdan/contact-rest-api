@@ -54,7 +54,28 @@ exports.addData = async function(req,res){
     }else{
         response.error("Insertin data Failed",res);
     }
-
     
+}
+
+
+// mengubah data berdasarkan nama mahasiswa
+
+exports.updateData = async function(req,res){
+    const data = {
+        nama : req.body.nama,
+        nohp : req.body.nohp,
+        email : req.body.email
+    }
+
+    const id = req.body.id;
+
+    const update = await Contact.updateMany({_id : id},data);
+
+    if(update){
+        response.ok("Data Berhasil Dirubah ",res);
+    }else{
+        response.error("Data Gagal Dirubah ",res);
+    }
+
 }
 
