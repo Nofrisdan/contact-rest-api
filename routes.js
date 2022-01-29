@@ -7,4 +7,5 @@ module.exports = function(app){
     app.route("/Contact/all").get(controller.alldata);
     app.route("/Contact/get").get(controller.getData);
     app.route("/Contact/add").post(controller.addData);
+    app.route("/Contact/edit").put(controller.updateData);
 }
