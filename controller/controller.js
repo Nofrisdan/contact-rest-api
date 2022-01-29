@@ -79,3 +79,17 @@ exports.updateData = async function(req,res){
 
 }
 
+// Menghapus data kontak
+exports.deleteData = async function(req,res){
+
+    const id = req.body.id;
+
+    const del = await Contact.deleteOne({_id : id});
+
+    if(del){
+        response.ok("Data Behasil Dihapus",res);
+    }else{
+        response.error("Data Tidak Berhasil dihapus",res);
+    }
+}
+
