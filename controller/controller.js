@@ -84,7 +84,7 @@ exports.deleteData = async function(req,res){
 
     const id = req.body.id;
 
-    const del = await Contact.deleteOne({_id : id});
+    const del = await Contact.deleteMany({_id : id});
 
     if(del){
         response.ok("Data Behasil Dihapus",res);
