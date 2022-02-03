@@ -15,9 +15,12 @@ const routesMongo = function(app){
 // database mysql
 const routesMysql = function(app){
     const controller = require("./controller/mysql");
-    app.route("/rest-api/contact").get(controller.index);
 
+    app.route("/rest-api/contact")
+        .get(controller.index);
 
+    app.route("/rest-api/contact/getJoin")
+        .get(controller.getJoin);
 
 
     // 404 notfound
