@@ -1,16 +1,31 @@
 const mongoose = require("mongoose");
 
 // database
-const Contact = mongoose.model("Contact",{
-    nama : {
+const Contact = mongoose.model("Contact", {
+    nama: {
+        type: String,
+        required: true
+    },
+    nohp: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    }
+})
+
+const Auth = mongoose.model("Auth",{
+    user_id : {
         type : String,
         required : true
     },
-    nohp :{
-        type : String,
+    token : {
+        type:String,
         required : true
     },
-    email : {
+    ip_addres : {
         type : String,
         required : true
     }
@@ -18,5 +33,6 @@ const Contact = mongoose.model("Contact",{
 
 
 module.exports = {
-    Contact
+    Contact,
+    Auth
 };

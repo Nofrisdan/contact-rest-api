@@ -2,7 +2,7 @@
 
 // database
 require("../database/connect");
-const {Contact} = require("../model/Kontak_m");
+const {Contact,Auth} = require("../model/Kontak_m");
 const response = require("../res/res");
 
 
@@ -22,7 +22,7 @@ exports.alldata = async function(req,res){
     if(data.length != 0){
         response.ok(data,res);
     }else{
-        response.error("Your Request Is Broken",res);
+        response.ok("Data Is Empty",res);
     }
 }
 
