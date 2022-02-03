@@ -12,8 +12,10 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-const routes = require("./routes");
-routes(app);
+const {routesMysql} = require("./routes");
+routesMysql(app);
+
+
 
 // configuration
 app.listen(port,() => {

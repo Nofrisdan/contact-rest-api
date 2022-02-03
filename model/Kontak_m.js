@@ -13,6 +13,10 @@ const Contact = mongoose.model("Contact", {
     email: {
         type: String,
         required: true
+    },
+    password : {
+        type : String,
+        required : true
     }
 })
 

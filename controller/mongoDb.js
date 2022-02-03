@@ -1,7 +1,7 @@
 'use strict';
 
 // database
-require("../database/connect");
+require("../database/mongoDb");
 const {Contact,Auth} = require("../model/Kontak_m");
 const response = require("../res/res");
 
