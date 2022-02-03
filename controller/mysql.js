@@ -16,7 +16,13 @@ exports.index = (req,res) => {
 exports.getJoin = (req,res) => {
 
     const param = db.query("SELECT nama_user,email,wa,token FROM tb_user INNER JOIN tb_akses ON tb_user.id_user=tb_akses.id_user",(err,result,fields) => {
-        if(err) throw err;
-        response.ok(result,res);
+        if(err){
+            console.log(err);
+            response.error(err,res);
+        }else{
+            
+            response.ok(result,res);
+        }
+        
     })
 }
