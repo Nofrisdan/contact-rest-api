@@ -22,7 +22,7 @@ exports.error = function(values,res){
     res.end();
 }
 
-exports.bad = function(req,res){
+exports.bad = function(res){
     const data = {
         'status':400,
         'values' : 'Bad Request'
