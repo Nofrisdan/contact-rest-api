@@ -64,7 +64,10 @@ exports.login = function(req,res){
             response.error(err,res);
         }else{
 
+            // cek apakah data tersedia
             if(result.length > 0){
+
+                // cek apakah id_user sudah memiliki token
 
                 // generate token jwt
                 const token = jwt.sign({result},config.secret,{
