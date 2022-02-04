@@ -25,7 +25,7 @@ exports.register = function(req,res){
 
    db.query(sql,(err,result) => {
        if(err){
-           console.log(err);
+           response.bad(err,res);
        }else{
            if(result.length == 0){
             //    insert ke database

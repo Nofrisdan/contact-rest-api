@@ -22,14 +22,12 @@ exports.error = function(values,res){
     res.end();
 }
 
-exports.tes = function(params,res){
+exports.bad = function(req,res){
     const data = {
-        'status' : params.status,
-        'author' : params.nama,
-        'msg' : params.msg,
-        'license' : params.license
+        'status':400,
+        'values' : 'Bad Request'
     }
 
-    res.json(params);
+    res.json(data);
     res.end();
 }
