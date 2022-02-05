@@ -63,7 +63,6 @@ exports.login = function(req,res){
         if(err){
             response.error(err,res);
         }else{
-
             // cek apakah data tersedia
             if(result.length > 0){
 
@@ -77,31 +76,49 @@ exports.login = function(req,res){
 
                 const id_user = result[0].id_user;
 
-                const data = {
-                    id_user : id_user,
-                    token : token,
-                    ip_addres : ip.address()
-                }
+                // cek apakah id_user tersedia di tb_akses
+                db.query("SELECT token FROM ?? WHERE ??=?",['tb_akses','id_user',id_user],(err,result)=>{
+                    if(result.length == 0){ //data kosong
 
-                // insert to tb_akses
-                const sql2 = "INSERT INTO ?? SET ?";
-                const param2 = ['tb_akses',data];
-                db.query(mysql.format(sql2,param2),(err,result) => {
-                    if(err){
-                        // response.bad(res);
-                        response.error(err,res);
-                    }else{
+
+                        const data = {
+                            id_user : id_user,
+                            token : token,
+                            ip_addres : ip.address()
+                        }
+
+                        // insert to tb_akses
+                        const sql2 = "INSERT INTO ?? SET ?";
+                        const param2 = ['tb_akses',data];
+
+                        db.query(mysql.format(sql2,param2),(err,result) => {
+                            if(err){
+                                // response.bad(res);
+                                response.error(err,res);
+                            }else{
+                                res.json({
+                                    'success' : true,
+                                    'message' : "Generate Token Success",
+                                    token,
+                                    'currUser' : data.id_user
+                                })
+
+                                res.end();
+
+                            }
+                        })
+                    }else{ //data terisi
+
                         res.json({
                             'success' : true,
-                            'message' : "Generate Token Success",
-                            token,
-                            'currUser' : data.id_user
+                            'message' : "Token Generate",
+                            'token' : result[0].token
                         })
 
                         res.end();
-
                     }
                 })
+               
             }else{
                 // response.error("Acces",res);
                 res.json({
@@ -116,20 +133,30 @@ exports.login = function(req,res){
     })
 }
 
+
+exports.verifikasi = function(req,res){
+    res.json({
+        status : 200,
+        values : "Halaman ini membutuhkan verifikasi"
+    });
+
+    res.end();
+}
+
 exports.tes = function(req,res){
 
-    const post = {
-        email : req.body.email,
-        password : req.body.password
-    }
+    // const post = {
+    //     email : req.body.email,
+    //     password : req.body.password
+    // }
 
     // row query ?? = variabel
     // row query ? = parameter
-    db.query("SELECT id_user,nama_user,email,wa FROM tb_user WHERE ??=? AND ??=?",['email',post.email,'password',md5(post.password)],(err,result)=> {
-        if(err){
-            response.error(err,res);
-        }else{
-            response.ok(result,res);
-        }
+    db.query("SELECT token FROM tb_akses WHERE id_user=1",(err,result) => {
+       res.json({
+           token : result[0].token
+       })
+
+       res.end();
     })
 }

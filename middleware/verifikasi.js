@@ -16,7 +16,6 @@ module.exports = function(req,res,next){
             if(error){
                 return res.status(401).send({auth : false, message : "Token Tidak terdaftar"});
             }else{
-
                 // set req auth
                 req.auth = decode;
 
