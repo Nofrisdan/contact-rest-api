@@ -14,13 +14,22 @@ const routesMongo = function(app){
 
 // database mysql
 const routesMysql = function(app){
+
+    // verifikasi token 
+    // jika token tidak terverifikasi maka jangan jalankan controller  
+
     const controller = require("./controller/mysql");
 
-    app.route("/rest-api/contact")
+    // get Data
+    app.route("/rest-api/contact/all")
         .get(controller.index);
 
     app.route("/rest-api/contact/getJoin")
         .get(controller.getJoin);
+
+    // delete user
+    app.route("/rest-api/contact/delete")
+        .delete(controller.delAkun);
 
 
     // 404 notfound

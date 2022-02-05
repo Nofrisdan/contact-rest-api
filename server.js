@@ -17,6 +17,7 @@ app.use(morgan("dev"));
 // routes middleware
 app.use("/auth",require("./middleware"));
 
+
 // routes utama
 const {routesMysql} = require("./routes");
 routesMysql(app);

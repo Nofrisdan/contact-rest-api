@@ -26,3 +26,18 @@ exports.getJoin = (req,res) => {
         
     })
 }
+
+// delete akun 
+exports.delAkun = (req,res) => {
+   const token = req.body.token
+    const sql = "DELETE FROM ?? WHERE ??=(SELECT ?? FROM ?? WHERE ??=?)";
+    const param = ["tb_user","id_user","id_user","tb_akses","token",token];
+
+    db.query(sql,param,(err,result)=>{
+        if(err){
+            response.error(err,res);
+        }else{
+            response.ok("Akun Berhasil Dihapus",res);
+        }
+    })
+}

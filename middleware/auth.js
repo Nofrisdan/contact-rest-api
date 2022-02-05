@@ -56,6 +56,7 @@ exports.login = function(req,res){
         email : req.body.email
     }
 
+    // cek email dan password
     const sql = "SELECT id_user,nama_user,email,wa FROM tb_user WHERE ??=? AND ??=?";
     const param = ['email',post.email,'password',md5(post.password)];
 
@@ -152,11 +153,25 @@ exports.tes = function(req,res){
 
     // row query ?? = variabel
     // row query ? = parameter
-    db.query("SELECT token FROM tb_akses WHERE id_user=1",(err,result) => {
-       res.json({
-           token : result[0].token
-       })
 
-       res.end();
+    const sql = "SELECT ?? FROM ?? WHERE ??=(SELECT ?? FROM ?? WHERE ??=?)";
+    const param = ["id_user","tb_user","id_user","id_user","tb_akses","token",req.query.token]
+    
+    db.query(mysql.format(sql,param),(err,result) => {
+
+        if(err) {
+            res.json({
+                value : err
+            })
+
+            res.end()
+        }else{
+            res.json({
+                result
+            })
+     
+            res.end();
+        }
+      
     })
 }
